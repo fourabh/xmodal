@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 const XModal = () => {
   const [user, setUser] = useState({
@@ -14,10 +14,8 @@ const XModal = () => {
     setIsModalOpen(true);
   };
 
-  const handleCloseModal = (e) => {
-    if (e.target.className === 'modal') {
-      setIsModalOpen(false);
-    }
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   const handleSubmit = (e) => {
@@ -29,7 +27,7 @@ const XModal = () => {
       return;
     }
 
-    if (!email.includes('@')) {
+    if (!email.includes("@")) {
       alert("Invalid email. Please check your email address.");
       return;
     }
@@ -39,9 +37,9 @@ const XModal = () => {
       return;
     }
 
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Date().toISOString().split("T")[0];
     if (dob > today) {
-      alert("Invalid date of birth. Please select a valid date.");
+      alert("Invalid date of birth. Date of birth cannot be in the future.");
       return;
     }
 
@@ -56,58 +54,60 @@ const XModal = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser(prevUser => ({ ...prevUser, [name]: value }));
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 
   return (
-    <div className="modal" onClick={handleCloseModal}>
+    <div className="App">
       <h1>User Details Modal</h1>
-      <button className="open-form-button" onClick={handleOpenModal}>Open Form</button>
+      <button onClick={handleOpenModal} className="openform">Open Form</button>
 
       {isModalOpen && (
-        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-          <h3>Fill Details</h3>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              required
-              id="username"
-              name="username"
-              value={user.username}
-              onChange={handleChange}
-            />
-            <label htmlFor="email">Email Address:</label>
-            <input
-              type="email"
-              required
-              id="email"
-              name="email"
-              value={user.email}
-              onChange={handleChange}
-            />
-            <label htmlFor="phone">Phone Number:</label>
-            <input
-              type="text"
-              id="phone"
-              required
-              name="phone"
-              value={user.phone}
-              onChange={handleChange}
-            />
-            <label htmlFor="dob">Date of Birth:</label>
-            <input
-              type="date"
-              id="dob"
-              required
-              name="dob"
-              value={user.dob}
-              onChange={handleChange}
-            />
-            <button type="submit" className="submit-button">
-              Submit
-            </button>
-          </form>
+        <div className="modal" onClick={handleCloseModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h3>Fill Details</h3>
+            <form onSubmit={handleSubmit}>
+              <label>Username:</label>
+              <input
+                type="text"
+                required
+                id="username"
+                name="username"
+                value={user.username}
+                onChange={handleChange}
+              />
+              <label>Email Address:</label>
+              <input
+                type="email"
+                required
+                id="email"
+                name="email"
+                value={user.email}
+                onChange={handleChange}
+              />
+              <label>Phone Number:</label>
+              <input
+                type="text"
+                id="phone"
+                required
+                name="phone"
+                value={user.phone}
+                onChange={handleChange}
+              />
+              <label>Date of Birth:</label>
+              <input
+                type="date"
+                id="dob"
+                required
+                name="dob"
+                value={user.dob}
+                onChange={handleChange}
+              />
+              <button type="submit" className="submit-button">
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </div>
